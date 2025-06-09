@@ -1,0 +1,6 @@
+com\goodme\api\controller\UserController.class
+com\goodme\api\controller\ProductController.class
+com\goodme\api\GoodmeApplication.class
+com\goodme\api\controller\AuthController.class
+com\goodme\api\config\SwaggerConfig.class
+com\goodme\api\controller\FileController.class

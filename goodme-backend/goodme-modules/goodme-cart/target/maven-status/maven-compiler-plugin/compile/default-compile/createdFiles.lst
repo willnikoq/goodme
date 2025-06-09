@@ -1,0 +1,12 @@
+com\goodme\cart\config\MockFeignConfig.class
+com\goodme\cart\entity\CartItem.class
+com\goodme\cart\config\MockFeignConfig$2.class
+com\goodme\cart\controller\CartController.class
+com\goodme\cart\service\impl\CartServiceImpl$1.class
+com\goodme\cart\service\impl\CartServiceImpl.class
+com\goodme\cart\dto\CartItemDTO.class
+com\goodme\cart\config\MockFeignConfig$1.class
+com\goodme\cart\service\CartService.class
+com\goodme\cart\mapper\CartItemMapper.class
+com\goodme\cart\dto\CartItemSpecDTO.class
+com\goodme\cart\config\FeignConfig.class

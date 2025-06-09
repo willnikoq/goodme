@@ -1,0 +1,11 @@
+com\goodme\framework\config\WebMvcConfig.class
+com\goodme\framework\config\MinioConfig.class
+com\goodme\framework\config\ThreadPoolConfig.class
+com\goodme\framework\config\WebConfig.class
+com\goodme\framework\config\WebSecurityConfig.class
+com\goodme\framework\config\GlobalExceptionHandler.class
+com\goodme\framework\config\MybatisPlusConfig.class
+com\goodme\framework\security\JwtAuthorizationFilter.class
+com\goodme\framework\security\JwtTokenProvider.class
+com\goodme\framework\config\OpenAPIConfig.class
+com\goodme\framework\config\RedisConfig.class

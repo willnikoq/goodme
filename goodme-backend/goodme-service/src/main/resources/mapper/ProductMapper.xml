@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goodme.service.mapper.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.goodme.service.entity.Product">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="category_id" property="categoryId" />
+        <result column="thumbnail" property="thumbnail" />
+        <result column="images" property="images" />
+        <result column="description" property="description" />
+        <result column="price" property="price" />
+        <result column="stock" property="stock" />
+        <result column="stock_warning" property="stockWarning" />
+        <result column="sales" property="sales" />
+        <result column="unit" property="unit" />
+        <result column="weight" property="weight" />
+        <result column="status" property="status" />
+        <result column="is_new" property="isNew" />
+        <result column="is_hot" property="isHot" />
+        <result column="sort" property="sort" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="deleted" property="deleted" />
+    </resultMap>
+    
+    <!-- 商品DTO结果映射 -->
+    <resultMap id="ProductDTOResultMap" type="com.goodme.service.dto.ProductDTO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="category_id" property="categoryId" />
+        <result column="category_name" property="categoryName" />
+        <result column="thumbnail" property="thumbnail" />
+        <result column="description" property="description" />
+        <result column="price" property="price" />
+        <result column="stock" property="stock" />
+        <result column="sales" property="sales" />
+        <result column="unit" property="unit" />
+        <result column="status" property="status" />
+        <result column="is_new" property="isNew" />
+        <result column="is_hot" property="isHot" />
+    </resultMap>
+    
+    <!-- 分页查询商品 -->
+    <select id="queryProductPage" resultMap="ProductDTOResultMap">
+        SELECT p.id, p.name, p.category_id, c.name as category_name, p.thumbnail, 
+               p.description, p.price, p.stock, p.sales, p.unit, p.status, p.is_new, p.is_hot
+        FROM product p
+        LEFT JOIN category c ON p.category_id = c.id
+        <where>
+            p.deleted = 0 AND p.status = 1
+            <if test="query.categoryId != null">
+                AND p.category_id = #{query.categoryId}
+            </if>
+            <if test="query.keyword != null and query.keyword != ''">
+                AND p.name LIKE CONCAT('%', #{query.keyword}, '%')
+            </if>
+            <if test="query.isNew != null">
+                AND p.is_new = #{query.isNew}
+            </if>
+            <if test="query.isHot != null">
+                AND p.is_hot = #{query.isHot}
+            </if>
+        </where>
+        <choose>
+            <when test="query.sortField == 'price' and query.sortOrder == 'asc'">
+                ORDER BY p.price ASC
+            </when>
+            <when test="query.sortField == 'price' and query.sortOrder == 'desc'">
+                ORDER BY p.price DESC
+            </when>
+            <when test="query.sortField == 'sales' and query.sortOrder == 'asc'">
+                ORDER BY p.sales ASC
+            </when>
+            <when test="query.sortField == 'sales' and query.sortOrder == 'desc'">
+                ORDER BY p.sales DESC
+            </when>
+            <when test="query.sortField == 'time' and query.sortOrder == 'asc'">
+                ORDER BY p.create_time ASC
+            </when>
+            <when test="query.sortField == 'time' and query.sortOrder == 'desc'">
+                ORDER BY p.create_time DESC
+            </when>
+            <otherwise>
+                ORDER BY p.sort ASC, p.id DESC
+            </otherwise>
+        </choose>
+    </select>
+</mapper> 
